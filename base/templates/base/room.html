@@ -1,0 +1,29 @@
+{% extends 'base/main.html'%} {%load static%} {% block content %}
+<main>
+  <input id="APP_ID" value="{{ APP_ID }}" type="hidden" />
+  <section id="room-name-wrapper">
+    <p>Room Name: <span id="room-name"></span></p>
+  </section>
+
+  <section id="video-streams">
+    
+  </section>
+  <section id="controls-wrapper">
+    <div class="icon-wrapper">
+      <img src="{%static 'images/microphone.svg'%}" id="mic-btn" class="control-icon" alt="">
+    </div>
+    <div class="icon-wrapper">
+      <img src="{%static 'images/video.svg'%}" id="camera-btn" class="control-icon" alt="">
+    </div>
+    <div class="icon-wrapper">
+      <img src="{%static 'images/leave.svg'%}" id="leave-btn" class="control-icon" alt="">
+    </div>
+  </section>
+</main>
+<script
+  type="text/javascript"
+  src="{% static 'assets/AgoraRTC_N-4.20.2.js'%}"
+></script>
+<script type="text/javascript" src="{%static 'js/streams.js'%}"></script>
+
+{%endblock content%}

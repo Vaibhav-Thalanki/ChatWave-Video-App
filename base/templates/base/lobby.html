@@ -1,0 +1,26 @@
+{% extends 'base/main.html'%} {%load static%} {% block content %}
+<main>
+  <section id="form-container">
+    <img src="{%static 'images/chat-icon.png'%}" alt="" id="logo" />
+    <div>
+      <h1>Welcome to Chat</h1>
+      <p>Group Video Calling Application just for you!</p>
+    </div>
+    <form action="" id="form">
+      <div class="form-field">
+        <input type="submit" value="Join Stream" />
+      </div>
+    </form>
+  </section>
+</main>
+
+<script type="text/javascript">
+  let form = document.getElementById("form");
+  let handleSubmit = async (e) => {
+    e.preventDefault();
+    window.open("/room", "_self");
+  };
+  form.addEventListener('submit',handleSubmit)
+</script>
+
+{%endblock content%}
