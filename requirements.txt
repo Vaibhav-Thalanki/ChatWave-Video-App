@@ -1,0 +1,8 @@
+agora_token_builder==1.0.0
+asgiref==3.8.0
+backports.zoneinfo==0.2.1
+Django==4.2.11
+python-dotenv==1.0.1
+sqlparse==0.4.4
+typing_extensions==4.10.0
+tzdata==2024.1
