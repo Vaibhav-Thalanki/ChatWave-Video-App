@@ -2,14 +2,28 @@
 <main>
   <section id="form-container">
     <img src="{%static 'images/chat-icon.png'%}" alt="" id="logo" />
-    <div>
+    <div id="welcome-message">
       <h1>Welcome to Chat</h1>
       <p>Group Video Calling Application just for you!</p>
     </div>
     <form action="" id="form">
       <div class="form-field">
-        <input type="text" name="room" placeholder="Enter a room code..." style="text-transform: uppercase;"/>
+        <input
+          type="text"
+          name="room"
+          placeholder="Enter a room code..."
+          style="text-transform: uppercase"
+        />
       </div>
+      <div class="form-field">
+        <input
+          type="text"
+          name="username"
+          placeholder="Enter Your Name..."
+          style="text-transform: uppercase"
+        />
+      </div>
+
       <div class="form-field">
         <input type="submit" value="Join Stream" />
       </div>
@@ -21,22 +35,20 @@
   let form = document.getElementById("form");
   let handleSubmit = async (e) => {
     e.preventDefault();
-    let room = e.target.room.value.toUpperCase()
-    let response = await fetch(`/get_token/?channel=${room}`)
-    let data = await response.json()
+    let room = e.target.room.value.toUpperCase();
+    let response = await fetch(`/get_token/?channel=${room}`);
+    let data = await response.json();
 
-    let UID = data.uid
-    let token = data.token
-    
-    sessionStorage.setItem('UID',UID)
-    sessionStorage.setItem('token',token)
-    sessionStorage.setItem('room',room)
+    let UID = data.uid;
+    let token = data.token;
 
-
+    sessionStorage.setItem("UID", UID);
+    sessionStorage.setItem("token", token);
+    sessionStorage.setItem("room", room);
 
     window.open("/room", "_self");
   };
-  form.addEventListener('submit',handleSubmit)
+  form.addEventListener("submit", handleSubmit);
 </script>
 
 {%endblock content%}
