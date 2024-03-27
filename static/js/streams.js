@@ -3,15 +3,16 @@ document.addEventListener("DOMContentLoaded", function (event) {
   console.log(APP_ID);
   const CHANNEL = "mychannel";
   const TOKEN =
-    "00603a3bcc67ca94c90977ec0e52e4f578dIAA+GfffjzUef5g3bHCE6+rSrkD+u7+A4qG87nCFTJ/Wud+pr8cI9AikIgD3BgUFgVwBZgQAAQCBXAFmAgCBXAFmAwCBXAFmBACBXAFm";
-  let UID = 117;
+    "007eJxTYLjr9+sXk0t9yq/TP7lPPXqk7/z63hmD967T475en7vWzSxJgcHAONE4KTnZzDw50dIk2dLA0tw8Ndkg1dQo1STN1NwiJeI/c1pDICNDyzFHRkYGCATxORlyK5MzEvPyUnMYGAAqUyTr";
+  let UID 
 
   const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
   let localTracks = [];
   let remoteUsers = {};
 
   let joinAndDisplayLocalStream = async () => {
-    await client.join(APP_ID, CHANNEL, TOKEN, UID);
+    UID = await client.join(APP_ID, CHANNEL, TOKEN, null);
+    console.log("uid is ",UID);
     localTracks = await AgoraRTC.createMicrophoneAndCameraTracks();
     client.on("user-published", handleUserJoin);
     client.on("user-left", handleUserLeft);
