@@ -3,12 +3,13 @@ const APP_ID = document.getElementById("APP_ID").value;
 const CHANNEL = sessionStorage.getItem("room");
 const TOKEN = sessionStorage.getItem("token");
 let UID = Number(sessionStorage.getItem("UID"));
+let NAME = sessionStorage.getItem("name");
 
 const client = AgoraRTC.createClient({ mode: "rtc", codec: "vp8" });
 let localTracks = [];
 let remoteUsers = {};
 
-console.log(APP_ID," ",CHANNEL);
+console.log(APP_ID, " ", CHANNEL);
 let joinAndDisplayLocalStream = async () => {
   client.on("user-published", handleUserJoin);
   client.on("user-left", handleUserLeft);
@@ -21,9 +22,10 @@ let joinAndDisplayLocalStream = async () => {
   }
 
   localTracks = await AgoraRTC.createMicrophoneAndCameraTracks();
-  
+  let member = await createMember();
+
   let player = `<div class="video-container" id="user-container-${UID}">
-    <div class="username-wrapper"><span id="user-name">My Name</span></div>
+    <div class="username-wrapper"><span id="user-name">${member.name}</span></div>
     <div class="video-player-custom" id="user-${UID}"></div>
   </div>`;
 
@@ -42,8 +44,10 @@ let handleUserJoin = async (user, mediaType) => {
     if (player != null) {
       player.remove();
     }
+    let member = await get_member(user);
+
     player = `<div class="video-container" id="user-container-${user.uid}">
-        <div class="username-wrapper"><span id="user-name">My Name</span></div>
+        <div class="username-wrapper"><span id="user-name">${member.name}</span></div>
         <div class="video-player-custom" id="user-${user.uid}"></div>
       </div>`;
 
@@ -89,6 +93,24 @@ let toggleMic = async (e) => {
     e.target.style.backgroundColor = "rgb(255,80,80,1)";
   }
 };
+
+let createMember = async () => {
+  let response = await fetch("/create_member/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name: NAME, room_name: CHANNEL, UID: UID }),
+  });
+  let member = await response.json();
+  return member;
+};
+
+let get_member = async(user)=>{
+    let response = await fetch(`/get_member/?UID=${user.uid}&room_name=${CHANNEL}`,)
+    let member = await response.json()
+    return member
+}
 
 joinAndDisplayLocalStream();
 

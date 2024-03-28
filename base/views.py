@@ -5,6 +5,9 @@ import random
 from dotenv import load_dotenv
 import time
 import os
+import json
+from .models import RoomMember
+from django.views.decorators.csrf import csrf_exempt
 load_dotenv()
 
 def getToken(request):
@@ -27,3 +30,20 @@ def room(request):
     print(os.getenv('APP_ID'))
     return render(request, 'base/room.html',
     context={'APP_ID': os.environ.get('APP_ID')})
+
+@csrf_exempt
+def createMember(request):
+    data = json.loads(request.body)
+    member, created = RoomMember.objects.get_or_create(
+        name=data['name'],
+        uid=data['UID'],
+        room_name = data['room_name']
+    )
+    return JsonResponse({'name':data['name']},safe=False)
+
+def getMember(request):
+    uid = request.GET.get('UID')
+    room_name = request.GET.get('room_name')
+    member = RoomMember.objects.get(uid=uid,room_name=room_name)
+    name = member.name
+    return JsonResponse({'name':name},safe=False)

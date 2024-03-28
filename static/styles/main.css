@@ -128,8 +128,7 @@ border-radius: 5px;
 @media screen and (max-width: 1650px) {
     .video-container{
         flex-basis: 300px;
-        min-height: 200px;
-        
+        min-height: 200px;   
     }
 }
 
