@@ -61,6 +61,7 @@ let handleUserJoin = async (user, mediaType) => {
   }
 };
 let handleUserLeft = async (user) => {
+  await deleteMemberRemote(user);
   delete remoteUsers[user.uid];
   document.getElementById(`user-container-${user.uid}`).remove();
 };
@@ -71,6 +72,7 @@ let leaveAndRemoveLocalStream = async () => {
     localTracks[i].close();
   }
   await client.leave();
+  await deleteMember();
   window.open("/", "_self");
 };
 
@@ -106,13 +108,46 @@ let createMember = async () => {
   return member;
 };
 
-let get_member = async(user)=>{
-    let response = await fetch(`/get_member/?UID=${user.uid}&room_name=${CHANNEL}`,)
-    let member = await response.json()
-    return member
-}
+let get_member = async (user) => {
+  let response = await fetch(
+    `/get_member/?UID=${user.uid}&room_name=${CHANNEL}`
+  );
+  let member = await response.json();
+  return member;
+};
+
+let deleteMember = async () => {
+  let response = await fetch("/delete_member/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ name: NAME, room_name: CHANNEL, UID: UID }),
+  });
+  let data = await response.json();
+};
+
+let deleteMemberRemote = async (user) => {
+  let response = await fetch("/delete_member/", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+      name: user.name,
+      room_name: CHANNEL,
+      UID: user.uid,
+    }),
+  });
+  let data = await response.json();
+  console.log(data["response"]);
+};
 
 joinAndDisplayLocalStream();
+
+window.addEventListener("beforeunload", async () => {
+  await deleteMember();
+});
 
 document
   .getElementById("leave-btn")

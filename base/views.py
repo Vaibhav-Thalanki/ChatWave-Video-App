@@ -47,3 +47,17 @@ def getMember(request):
     member = RoomMember.objects.get(uid=uid,room_name=room_name)
     name = member.name
     return JsonResponse({'name':name},safe=False)
+
+@csrf_exempt
+def deleteMember(request):
+    data = json.loads(request.body)
+    print(data)
+    response = 'Member already deleted'
+    try:
+        member = RoomMember.objects.get(uid=data['UID'],room_name=data['room_name'])
+        member.delete()
+        response = 'Member' + data['name'] +' was deleted'
+    except:
+        None
+    finally:
+        return JsonResponse({'response':response},safe=False)
