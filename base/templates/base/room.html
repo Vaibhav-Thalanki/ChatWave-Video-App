@@ -1,6 +1,8 @@
 {% extends 'base/main.html'%} {%load static%} {% block content %}
 <main>
   <input id="APP_ID" value="{{ APP_ID }}" type="hidden" />
+  <section id="screen">
+  <section id="video-wrapper" style="width: 100%;">
   <section id="room-name-wrapper">
     <p>Room Name: <span id="room-name"></span></p>
   </section>
@@ -18,7 +20,29 @@
     <div class="icon-wrapper">
       <img src="{%static 'images/leave.svg'%}" id="leave-btn" class="control-icon" alt="">
     </div>
+    <div class="icon-wrapper">
+      <img class="control-icon" id='chat-btn' src="{% static 'images/ai-chat-icon.png' %}" style="background-color: rgb(255,80,80,1);">
+    </div>
   </section>
+</section>
+  <section id="chat-wrapper" style="display: none;">
+    <div class="chat-container">
+      <ul id = 'chat-box'>
+        <li>hello,are we meeting today?</li>
+      </ul>
+    </div>
+    <div class="send-message-container">
+      <div id="transcription-container">
+          <div id="transcription-text-wrapper">
+              <textarea id="transcription-text" placeholder="Transcription will appear here" readonly></textarea>
+              <div id="displayText"></div>
+              <img class="control-icon" id="record-btn" src=" {% static "images/speak.png" %} ">
+              <img class="control-icon" id='send-btn' src= "{% static "images/send.png" %}">
+          </div>
+      </div>
+    </div> <!-- end chat-message -->
+  </section>
+</section>
 </main>
 <script
   type="text/javascript"
