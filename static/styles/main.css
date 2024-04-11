@@ -181,6 +181,7 @@ ul{margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px;}
 
 #chat-wrapper{
     flex-grow:1;
+    
 }
 
 .chat-container ul li{margin-bottom:20px;background-color:rgba(255,255,255,0.65);position:relative;font:1em/1.6 "arial";clear:both; padding: 5px;}
@@ -193,8 +194,6 @@ ul{margin-left: 0px;margin-right: 0px;padding-left: 0px;padding-right: 0px;}
 }
 .chat-container ul li:nth-child(odd):after{left:-15px;border-left:15px solid transparent;}
 .chat-container ul li:nth-child(even):after{right:-15px;border-top-color:rgba(255,255,255,0.3);border-right:15px solid transparent;}
-
-
 
 #record-btn{
     background-color: rgb(255,80,80,1);

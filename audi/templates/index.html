@@ -1,0 +1,42 @@
+<!-- whisper_asr_app/templates/index.html -->
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whisper ASR Integration</title>
+    <link rel="stylesheet" href="{% static 'styles.css' %}">
+</head>
+
+<body class="day-mode"> <!-- Initially set to day mode -->
+    <div id="container">
+        <h1>Whisper ASR Integration</h1>
+        <button id="toggleModeButton">Toggle Mode</button>
+        <div id="sentMessagesContainer"></div> <!-- Container for displaying sent messages -->
+        <div id="transcription-container">
+            <div id="transcription-text-wrapper">
+                <textarea id="transcription-text" placeholder="Transcription will appear here" readonly></textarea>
+                <div id="displayText"></div>
+            </div>
+        </div>
+        <div id="buttons-container">
+            <button id="recordButton">Start Recording</button>
+            <button id="clearButton">Clear Text</button>
+            <button id="sendButton">Send</button>
+            <button id="clearAllButton">Clear All Messages</button>
+        </div>
+        M<div>
+            <input type="text" name="question" id="LLMquestion">
+            <button id="clicktoaskLLM">Ask LLM</button>
+        </div>
+        
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="{% static 'script.js' %}"></script>
+</body>
+
+</html>

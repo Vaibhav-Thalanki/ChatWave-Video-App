@@ -237,10 +237,35 @@ if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
   });
 
   document.getElementById('send-btn').addEventListener('click',function() {
+    document.getElementById('record-btn').style.display = "none"
+
       // Process the transcribed text and send the message
       const message = trans_input.value;
-      console.log(message)
+      console.log("user asked: ",message)
       appendMessage(message);
+      const options = {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({text: message}),
+        };
+        fetch('/llm_response/', options)
+        .then(data => {
+          if (!data.ok) {
+            throw Error(data.status);
+          }
+          return data.json(); // Return the promise here
+        })
+        .then(response => {
+          console.log(response['response']); // Log the parsed JSON response here
+          appendMessage(response['response']);
+          document.getElementById('record-btn').style.display = "inline"
+        })
+        .catch(e => {
+          console.log('ERROR', e);
+        });
+
 
       // Clear the transcription area
       trans_input.value = '';

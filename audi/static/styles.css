@@ -1,0 +1,102 @@
+/* whisper_asr_app/static/styles.css */
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+/* Day Mode Styles */
+.day-mode {
+    background-color: #ffffff;
+    color: #333333;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+h1 {
+    color: #333;
+    margin: 20px 0;
+}
+
+#sentMessagesContainer {
+    max-height: 50vh;
+    overflow-y: auto;
+}
+
+#transcription-container {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #f0f0f0;
+    box-sizing: border-box;
+    padding: 10px;
+}
+
+#transcription-text-wrapper {
+    width: 100%;
+}
+
+#transcription-text {
+    width: calc(100% - 20px);
+    height: 100px;
+    font-size: 18px;
+    resize: none;
+}
+
+#displayText {
+    margin-top: 10px;
+    font-size: 18px;
+}
+
+#buttons-container {
+    margin-top: 10px;
+}
+
+button {
+    padding: 10px;
+    margin: 5px;
+    font-size: 16px;
+}
+
+
+.sent-message {
+    background-color: #DCF8C6;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+    display: inline-block;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+/* Optional: Style for timestamp */
+.sent-message .timestamp {
+    font-size: 12px;
+    color: #555;
+}
+
+/* Night Mode Styles */
+.night-mode {
+    background-color: #333333;
+    color: #ffffff;
+    h1 {
+            color:white;
+            margin: 20px 0;
+        }
+}
+
+.night-mode #transcription-container {
+    background-color: #222222;
+    color: #ffffff;
+}
+
+.night-mode #sentMessagesContainer {
+    background-color: #444444;
+    color: #ffffff;
+}
