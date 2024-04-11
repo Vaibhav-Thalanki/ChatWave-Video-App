@@ -260,7 +260,10 @@ if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
         .then(response => {
           console.log(response['response']); // Log the parsed JSON response here
           appendMessage(response['response']);
+          isRecording = false;
+          recognition.stop();
           document.getElementById('record-btn').style.display = "inline"
+          document.getElementById('record-btn').style.backgroundColor = 'rgb(255,80,80,1)'
         })
         .catch(e => {
           console.log('ERROR', e);
